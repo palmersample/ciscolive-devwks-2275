@@ -1,0 +1,58 @@
+# - model: Model 1
+#   manufacturer: Manufacturer 1
+#   slug: model-1
+#   u_height: 2
+#   custom_field_data:
+#     text_field: Description
+# - model: Model 2
+#   manufacturer: Manufacturer 1
+#   slug: model-2
+#   custom_field_data:
+#     text_field: Description
+# - model: Model 3
+#   manufacturer: Manufacturer 1
+#   slug: model-3
+#   is_full_depth: false
+#   u_height: 0
+#   custom_field_data:
+#     text_field: Description
+# - model: Other
+#   manufacturer: No Name
+#   slug: other
+#   custom_field_data:
+#     text_field: Description
+---
+- model: C9800-CL
+  part_number: C9800-CL
+  slug: c9800-cl
+  manufacturer: Cisco
+  u_height: 0
+
+- model: AIR-AP-1815W-B-K9
+  part_number: AIR-AP-1815W-B-K9
+  slug: air-ap-1815w-b-k9
+  manufacturer: Cisco
+  u_height: 0
+
+- model: AIR-AP-2802E-B-K9
+  part_number: AIR-AP-2802E-B-K9
+  slug: air-ap-2802e-b-k9
+  manufacturer: Cisco
+  u_height: 0
+
+- model: C9136I-B
+  part_number: C9136I-B
+  slug: c9136i-b
+  manufacturer: Cisco
+  u_height: 0
+  comments: Catalyst 9136 - US Regulatory Domain
+
+- model: C9124AXE-A
+  part_number: C9124AXE-A
+  slug: c9124axe-a
+  manufacturer: Cisco
+  u_height: 0
+
+# Canada: -A
+# Belgium: -E
+# Japan: -Q

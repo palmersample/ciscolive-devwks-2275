@@ -1,0 +1,172 @@
+## Possible Choices:
+##   type:
+##   - text
+##   - integer
+##   - boolean
+##   - date
+##   - url
+##   - select
+##   filter_logic:
+##   - disabled
+##   - loose
+##   - exact
+##
+## Examples:
+
+# text_field:
+#   type: text
+#   label: Custom Text
+#   description: Enter text in a text field.
+#   required: false
+#   weight: 0
+#   on_objects:
+#   - dcim.models.Device
+#   - dcim.models.Rack
+#   - dcim.models.Site
+#   - dcim.models.DeviceType
+#   - ipam.models.IPAddress
+#   - ipam.models.Prefix
+#   - tenancy.models.Tenant
+#   - virtualization.models.VirtualMachine
+# integer_field:
+#   type: integer
+#   label: Custom Number
+#   description: Enter numbers into an integer field.
+#   required: true
+#   filter_logic: loose
+#   weight: 10
+#   on_objects:
+#   - tenancy.models.Tenant
+# select_field:
+#   type: select
+#   label: Choose between items
+#   required: false
+#   filter_logic: exact
+#   weight: 30
+#   default: First Item
+#   on_objects:
+#   - dcim.models.Device
+#   choices:
+#   - First Item
+#   - Second Item
+#   - Third Item
+#   - Fifth Item
+#   - Fourth Item
+# select_field_legacy_format:
+#   type: select
+#   label: Choose between items
+#   required: false
+#   filter_logic: loose
+#   weight: 30
+#   on_objects:
+#   - dcim.models.Device
+#   choices:
+#   - value: A # this is the deprecated format.
+#   - value: B # we only use it for the tests.
+#   - value: C # please see above for the new format.
+#   - value: "D like deprecated"
+#     weight: 999
+#   - value: E
+# boolean_field:
+#   type: boolean
+#   label: Yes Or No?
+#   required: true
+#   filter_logic: loose
+#   default: "false" # important: put "false" in quotes!
+#   weight: 90
+#   on_objects:
+#   - dcim.models.Device
+# url_field:
+#   type: url
+#   label: Hyperlink
+#   description: Link to something nice.
+#   required: true
+#   filter_logic: disabled
+#   on_objects:
+#   - tenancy.models.Tenant
+# date_field:
+#   type: date
+#   label: Important Date
+#   required: false
+#   filter_logic: disabled
+#   on_objects:
+#   - dcim.models.Device
+---
+wlc_primary_association:
+  name: wlc_primary_association
+  description: Primary WLC association, also use for WLC SSO
+  label: AP - Primary WLC
+  object_type: dcim.models.Device
+  on_objects:
+    - dcim.models.Device
+  type: object
+  data_type: object
+  required: false
+
+wlc_secondary_association:
+  name: wlc_secondary_association
+  description: Secondary WLC association
+  label: AP - Secondary WLC
+  object_type: dcim.models.Device
+  on_objects:
+    - dcim.models.Device
+  type: object
+  data_type: object
+  required: false
+
+wlc_tertiary_association:
+  name: wlc_tertiary_association
+  description: Tertiary WLC association
+  label: AP - Tertiary WLC
+  object_type: dcim.models.Device
+  on_objects:
+    - dcim.models.Device
+  type: object
+  data_type: object
+  required: false
+
+wifi_radio_band:
+  name: wifi_radio_band
+  description: Wireless interface band assignment
+  label: Wireless band (GHz)
+  type: select
+  on_objects:
+    - dcim.models.Interface
+  choices:
+    - 2.4
+    - 5
+
+wifi_radio_channel:
+  name: wifi_radio_channel
+  description: Wireless interface channel assignment
+  label: Wireless Channel Assignment
+  type: select
+  on_objects:
+    - dcim.models.Interface
+  choices:
+    - 1
+    - 6
+    - 11
+    - 36
+    - 40
+    - 44
+    - 48
+    - 56
+    - 60
+    - 64
+    - 100
+    - 104
+    - 108
+    - 112
+    - 116
+    - 120
+    - 124
+    - 128
+    - 132
+    - 136
+    - 140
+    - 149
+    - 153
+    - 157
+    - 161
+    - 165

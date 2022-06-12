@@ -1,0 +1,33 @@
+# - name: switch
+#   slug: switch
+#   color: Grey
+# - name: router
+#   slug: router
+#   color: Cyan
+# - name: load-balancer
+#   slug: load-balancer
+#   color: Red
+# - name: server
+#   slug: server
+#   color: Blue
+# - name: patchpanel
+#   slug: patchpanel
+#   color: Black
+---
+- name: Switch
+  slug: switch
+  color: Grey
+
+- name: Router
+  slug: router
+  color: Cyan
+
+- name: WLC
+  slug: wlc
+  description: Wireless LAN Controller
+  color: Blue
+
+- name: AP
+  slug: ap
+  description: Wireless Access Point
+  color: Blue

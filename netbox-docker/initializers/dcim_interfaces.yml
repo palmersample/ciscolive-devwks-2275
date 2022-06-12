@@ -1,0 +1,94 @@
+## Possible Choices:
+##   type:
+##   - virtual
+##   - lag
+##   - 1000base-t
+##   - ... and many more. See for yourself:
+##     https://github.com/netbox-community/netbox/blob/295d4f0394b431351c0cb2c3ecc791df68c6c2fb/netbox/dcim/choices.py#L510
+##
+## Examples:
+
+# - device: server01
+#   enabled: true
+#   type: virtual
+#   name: to-server02
+# - device: server02
+#   enabled: true
+#   type: virtual
+#   name: to-server01
+---
+- device: WLC-NA-MCO-1
+  enabled: true
+  name: GigabitEthernet1
+  type: 10gbase-t
+
+- device: WLC-NA-MCO-1
+  enabled: true
+  name: GigabitEthernet2
+  type: 10gbase-t
+
+- device: WLC-NA-MCO-1
+  enabled: true
+  name: GigabitEthernet3
+  type: 10gbase-t
+
+- device: WLC-NA-MCO-2
+  enabled: true
+  name: GigabitEthernet1
+  type: 10gbase-t
+
+- device: WLC-NA-MCO-2
+  enabled: true
+  name: GigabitEthernet2
+  type: 10gbase-t
+
+- device: WLC-NA-MCO-2
+  enabled: true
+  name: GigabitEthernet3
+  type: 10gbase-t
+
+#- device: APNAMCO11N10
+#  enabled: true
+#  name: radio0
+#  tx_power: 12
+#  custom_field_data:
+#    wifi_radio_channel: 1
+#
+#- device: APNAMCO11N10
+#  enabled: true
+#  name: radio1
+#  tx_power: 15
+#  rf_channel_width: 20
+#  custom_field_data:
+#    wifi_radio_channel: 104
+#
+#- device: APNAMCO21C14
+#  enabled: true
+#  name: radio0
+#  tx_power: 9
+#  custom_field_data:
+#    wifi_radio_channel: 6
+#
+#- device: APNAMCO21C14
+#  enabled: true
+#  name: radio1
+#  tx_power: 15
+#  rf_channel_width: 20
+#  custom_field_data:
+#    wifi_radio_channel: 120
+
+
+#- device: APCGYWH1N33
+#  enabled: true
+#  name: wired1
+#  type: 1000base-t
+#
+#- device: APCGY1WH1N34
+#  enabled: true
+#  name: wired1
+#  type: 1000base-t
+#
+#- device: APCGY2D1E09
+#  enabled: true
+#  name: wired1
+#  type: 1000base-t
