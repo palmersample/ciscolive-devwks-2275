@@ -35,8 +35,8 @@ _BASE_DIR = dirname(dirname(abspath(__file__)))
 # Example: ALLOWED_HOSTS = ['netbox.example.com', 'netbox.internal.local']
 ALLOWED_HOSTS = environ.get('ALLOWED_HOSTS', '*').split(' ')
 
-CSRF_TRUSTED_ORIGINS = [f"http://{environ.get('ALLOWED_HOSTS', '*').split(' ')}",
-                        f"https://{environ.get('ALLOWED_HOSTS', '*').split(' ')}"]
+CSRF_TRUSTED_ORIGINS = [f"http://*.devnetcloud.com",
+                        f"https://*.devnetcloud.com"]
 
 # PostgreSQL database configuration. See the Django documentation for a complete list of available parameters:
 #   https://docs.djangoproject.com/en/stable/ref/settings/#databases
