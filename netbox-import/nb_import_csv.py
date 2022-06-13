@@ -7,6 +7,8 @@ import os
 import pynetbox
 from pynetbox.core.query import RequestError
 
+MORE_OUTPUT = True
+
 parser = argparse.ArgumentParser()
 parser.add_argument(
     "--no-update",
@@ -258,6 +260,13 @@ if __name__ == "__main__":
             reader = csv.DictReader(csvfile)
 
             for row in reader:
+
+                if MORE_OUTPUT:
+                    print("Reading CSV row:")
+                    for column_heading, column_value in row.items():
+                        print(f"{column_heading} = {column_value}")
+                    print()
+
                 # Generate the expected payload dictionary based on the CSV row
                 device_detail = generate_device_details(row)
 
