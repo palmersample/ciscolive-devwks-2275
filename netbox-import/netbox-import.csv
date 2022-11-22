@@ -1,6 +1,0 @@
-﻿device_name,device_role,device_type,serial,asset_tag,site,location,platform,primary_wlc,secondary_wlc,tertiary_wlc,wired_mac,radio0_mac,radio0_band,radio0_rf_role,radio0_enabled,radio0_channel_number,radio0_channel_width,radio0_tx_power,radio1_mac,radio1_band,radio1_rf_role,radio1_enabled,radio1_channel_number,radio1_channel_width,radio1_tx_power
-APMEL11N32,ap,air-ap-2802e-b-k9,XYZ012456ZZ,31907,mel,mel-1-1-n,iosxe,ciscolive-wlc,,,1234abcd1000,1234abcd10aa,2.4,ap,TRUE,1,,12,1234abcd10ab,5,ap,TRUE,36,20,15
-APMEL11N34,ap,air-ap-2802e-b-k9,XYZ012786ZZ,31995,mel,mel-1-1-n,iosxe,ciscolive-wlc,,,1234abcd1111,1234abcd11aa,2.4,ap,FALSE,11,,15,1234abcd11ab,5,ap,FALSE,104,20,12
-APMEL12C10,ap,air-ap-2802e-b-k9,XYZ823456ZZ,32021,mel,mel-1-2-c,iosxe,ciscolive-wlc,,,1234abcd1222,1234abcd12aa,2.4,ap,TRUE,6,,9,1234abcd12ab,5,ap,TRUE,60,20,12
-APMEL12S17,ap,air-ap-2802e-b-k9,XYZ012238YZ,19703,mel,mel-1-2-s,iosxe,ciscolive-wlc,,,1234abcd1333,1234abcd13aa,2.4,ap,TRUE,11,,12,1234abcd13ab,5,ap,TRUE,161,20,9
-APMEL13W02,ap,air-ap-2802e-b-k9,XYZ012499YL,27530,mel,mel-1-3-w,iosxe,ciscolive-wlc,,,1234abcd1444,1234abcd14aa,2.4,ap,TRUE,1,,18,1234abcd14ab,5,ap,TRUE,136,20,12
