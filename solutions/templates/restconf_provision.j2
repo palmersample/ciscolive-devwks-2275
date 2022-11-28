@@ -1,0 +1,26 @@
+{
+    "Cisco-IOS-XE-wireless-radio-cfg:radio-cfg-data": {
+        "ap-specific-configs": {
+            "ap-specific-config": [
+                {
+                    "ap-ethernet-mac-addr": "{{ ap_mac }}",
+                    "ap-specific-slot-configs": {
+                        "ap-specific-slot-config": [
+                            {
+                                "slot-id": {{ interface.name.replace("radio", "") }},
+                                "radio-params-{{ interface_rf_details.radio_band }}ghz": {
+                                    "channel-width": {{ interface_rf_details.channel_width | int }},
+                                    "channel": {{ interface_rf_details.channel }},
+                                    "dca": false,
+                                    "dtp": false,
+                                    "transmit-power": {{ interface.tx_power }},
+                                    "admin-state": {{ interface.enabled | string | lower if interface.enabled is defined else "true" }}
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}

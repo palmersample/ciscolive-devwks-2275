@@ -208,9 +208,8 @@ echo ""
 echo -n "What is your pod number? "
 read POD_NUMBER
 
-[ -f workshop.env ] && . ./workshop.env
+#[ -f workshop.env ] && . ./workshop.env
 
-VAULT_URL="https://pod${POD_NUMBER}-vault.${DNS_DOMAIN}"
 NETBOX_URL="https://pod${POD_NUMBER}-netbox.${DNS_DOMAIN}"
 
 echo ""
@@ -219,10 +218,6 @@ echo "************************************************************************"
 echo ""
 echo "TEST 1: Checking connectivity to the proxy for Pod ${POD_NUMBER}"
 test_proxy
-
-#echo ""
-#echo "TEST 2: Checking connectivity to Hashicorp Vault in Pod ${POD_NUMBER}:"
-#test_vault
 
 echo ""
 echo "TEST 2: Checking connectivity to NetBox in Pod ${POD_NUMBER}:"
@@ -240,11 +235,9 @@ echo ""
 if [ ${ERROR_COUNT} -gt 0 ]; then
   echo "THERE WERE ERRORS IN SETUP TESTING:"
   printf "${ERROR_MESSAGES}\n"
-  echo "\tPlease ask your proctor for assistance!"
+  printf "\tPlease ask your proctor for assistance!\n"
 else
   echo "ALL SETUP TASKS OK - Time to have some automation fun!"
-  export VAULT_ADDR=${VAULT_URL}
-  export VAULT_TOKEN=${VAULT_TOKEN}
   export NETBOX_URL=${NETBOX_URL}
   export WLC_HOST="pod${POD_NUMBER}-wlc.${DNS_DOMAIN}"
   export WLC_USERNAME=${WLC_USERNAME}

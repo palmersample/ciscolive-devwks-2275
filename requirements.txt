@@ -1,3 +1,4 @@
 pynetbox
 jinja2
-ncclient
+requests
+requests_toolbelt

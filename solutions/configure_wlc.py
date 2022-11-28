@@ -40,3 +40,31 @@ if __name__ == "__main__":
 
     print("*" * 78)
 
+    for ap in access_points:
+        print(f"Processing AP {ap.name}... ")
+        ap_interfaces = netbox.dcim.interfaces.filter(device=ap)
+        ap_mgmt_interface = netbox.dcim.interfaces.get(device=ap, mgmt_only=True)
+        ap_mgmt_mac = ap_mgmt_interface.mac_address
+
+        wlc_associations = get_ap_wlc_associations(netbox_api=netbox,
+                                                   netbox_ap_object=ap)
+
+        for wlc in wlc_associations:
+            wlc_session = create_request_session(host=wlc["wlc_dns"],
+                                                 username=WLC_USERNAME,
+                                                 password=WLC_PASSWORD)
+
+            print(f"\tAssociating AP with WLC '{wlc['wlc_name']}'... ", end="")
+
+            # Provision the AP using RESTCONF
+            provision_ap_on_wlc(request_session=wlc_session,
+                                ap_name=ap.name,
+                                ap_mac=ap_mgmt_mac)
+
+            # Provision the AP radios using RESTCONF
+            provision_ap_radios(request_session=wlc_session,
+                                ap_name=ap.name,
+                                ap_mac=ap_mgmt_mac,
+                                ap_interfaces=ap_interfaces)
+
+        print("*" * 78)

@@ -212,7 +212,9 @@ def get_rf_channel_value(radio_dict):
         netbox_channel_number = int(channel_number)
     else:
         if channel_width in netbox_channel_width_translation:
-            for channel_tuple, translated_channel in netbox_channel_width_translation[channel_width].items():
+            # pylint: disable=loop-global-usage
+            for channel_tuple, translated_channel in \
+                    netbox_channel_width_translation[channel_width].items():
                 if channel_number in channel_tuple:
                     netbox_channel_number = translated_channel
                     break
@@ -244,7 +246,7 @@ def parse_netbox_rf_channel(netbox_rf_channel):
     :param netbox_rf_channel: String representation of RF channel from NetBox
     :return: Dict containing formatted band, channel width, and WLC channel
     """
-    radio_band, radio_channel, channel_frequency, channel_width = netbox_rf_channel.split('-')
+    radio_band, radio_channel, _, channel_width = netbox_rf_channel.split('-')
 
     radio_band = re.sub(r'[^0-9]', '', radio_band)
 
