@@ -208,6 +208,8 @@ echo ""
 echo -n "What is your pod number? "
 read POD_NUMBER
 
+POD_NUMBER=$(echo ${POD_NUMBER} | sed 's/^0*//')
+
 #[ -f workshop.env ] && . ./workshop.env
 
 NETBOX_URL="https://pod${POD_NUMBER}-netbox.${DNS_DOMAIN}"
