@@ -1,1 +1,0 @@
-../netbox-import/rf_channel_map.py
