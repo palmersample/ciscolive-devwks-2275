@@ -21,7 +21,7 @@ def generate_device_details(netbox_api, csv_row):
         "serial": "serial",
         "asset_tag": "asset_tag",
         "device_type": "device_type",
-        "device_role": "device_role",
+        "device_role": "role",
         "platform": "platform",
         "site": "site",
         "location": "location",
