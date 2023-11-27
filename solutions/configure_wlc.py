@@ -42,8 +42,8 @@ if __name__ == "__main__":
 
     for ap in access_points:
         print(f"Processing AP {ap.name}... ")
-        ap_interfaces = netbox.dcim.interfaces.filter(device=ap)
-        ap_mgmt_interface = netbox.dcim.interfaces.get(device=ap, mgmt_only=True)
+        ap_interfaces = netbox.dcim.interfaces.filter(device_id=ap.id)
+        ap_mgmt_interface = netbox.dcim.interfaces.get(device_id=ap.id, mgmt_only=True)
         ap_mgmt_mac = ap_mgmt_interface.mac_address
 
         wlc_associations = get_ap_wlc_associations(netbox_api=netbox,

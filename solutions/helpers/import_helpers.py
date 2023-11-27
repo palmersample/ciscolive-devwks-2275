@@ -116,7 +116,7 @@ def update_interfaces(netbox_api, device_object, csv_row):
     }
 
     # Get the device interfaces
-    device_interfaces = netbox_api.dcim.interfaces.filter(device=device_object)
+    device_interfaces = netbox_api.dcim.interfaces.filter(device_id=device_object.id)
 
     # Initialize an empty list to store all interface details
     interfaces = []
