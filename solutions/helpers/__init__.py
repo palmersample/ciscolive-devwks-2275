@@ -13,6 +13,10 @@ from .wlc_helpers import (provision_ap_on_wlc,
                           provision_ap_radios,
                           get_ap_wlc_associations)
 
+from .wlc_test_helpers import (validate_ap_name,
+                               # validate_ap_tags,
+                               validate_ap_radios)
+
 # from .rf_channel_map import (get_rf_channel_value,
 #                              parse_netbox_rf_channel)
 
@@ -24,4 +28,7 @@ __all__ = [
     "provision_ap_radios",
     "get_ap_wlc_associations",
     "create_request_session",
+    "validate_ap_name",
+    # "validate_ap_tags",
+    "validate_ap_radios"
 ]

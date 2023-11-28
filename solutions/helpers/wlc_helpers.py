@@ -45,6 +45,15 @@ def get_ap_wlc_associations(netbox_api, netbox_ap_object):
 
 @http_exceptions
 def provision_ap_on_wlc(request_session, ap_name, ap_mac):
+    """
+    Perform initial AP provisioning on a WLC. This enables the hostname to
+    be assigned on AP association.
+
+    :param request_session: Request session reference to RESTCONF endpoint
+    :param ap_name: AP name to be assigned
+    :param ap_mac: AP Ethernet MAC address
+    :return: None
+    """
     wlc_tag_template = template_env.get_template("ap_tags.j2")
     wlc_host_template = template_env.get_template("provision_ap_hostname.j2")
 
@@ -72,7 +81,17 @@ def provision_ap_on_wlc(request_session, ap_name, ap_mac):
 
 @http_exceptions
 def provision_ap_radios(request_session, ap_name, ap_mac, ap_interfaces):
-    wlc_interface_template = template_env.get_template("restconf_provision.j2")
+    """
+    Pre-provision AP radio interfaces on a WLC. When the AP associates,
+    radio configs here will be applied on startup.
+
+    :param request_session: Request session reference to RESTCONF endpoint
+    :param ap_name: AP name to be assigned
+    :param ap_mac: AP Ethernet MAC address
+    :param ap_interfaces: NetBox object list reference to radio interfaces
+    :return: None
+    """
+    wlc_interface_template = template_env.get_template("provision_ap_radios.j2")
     for interface in ap_interfaces:
         if str(interface.name).lower().startswith('radio'):
             print(f"\tConfiguring interface: {interface}... ", end="")
@@ -91,4 +110,3 @@ def provision_ap_radios(request_session, ap_name, ap_mac, ap_interfaces):
                 print("OK")
             else:
                 print("FAILED")
-
