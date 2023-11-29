@@ -40,27 +40,30 @@ if __name__ == "__main__":
 
     print("*" * 78)
 
-    for ap in access_points:
-        print(f"Testing AP {ap.name} association to WLC... ")
-        ap_interfaces = netbox.dcim.interfaces.filter(device_id=ap.id)
-        ap_mgmt_interface = netbox.dcim.interfaces.get(device_id=ap.id, mgmt_only=True)
-        ap_mgmt_mac = ap_mgmt_interface.mac_address
+    if len(access_points) == 0:
+        print("FAILED: No access points have been defined in NetBox - nothing to test!\n")
+    else:
+        for ap in access_points:
+            print(f"Testing AP {ap.name} association to WLC... ")
+            ap_interfaces = netbox.dcim.interfaces.filter(device_id=ap.id)
+            ap_mgmt_interface = netbox.dcim.interfaces.get(device_id=ap.id, mgmt_only=True)
+            ap_mgmt_mac = ap_mgmt_interface.mac_address
 
-        wlc_associations = get_ap_wlc_associations(netbox_api=netbox,
-                                                   netbox_ap_object=ap)
+            wlc_associations = get_ap_wlc_associations(netbox_api=netbox,
+                                                       netbox_ap_object=ap)
 
-        for wlc in wlc_associations:
-            wlc_session = create_request_session(host=wlc["wlc_dns"],
-                                                 username=WLC_USERNAME,
-                                                 password=WLC_PASSWORD)
+            for wlc in wlc_associations:
+                wlc_session = create_request_session(host=wlc["wlc_dns"],
+                                                     username=WLC_USERNAME,
+                                                     password=WLC_PASSWORD)
 
-            print(f"    Testing WLC '{wlc['wlc_name']}'... ")
-            validate_ap_name(request_session=wlc_session,
-                             ap_name=ap.name,
-                             ap_mac=ap_mgmt_mac)
+                print(f"    Testing WLC '{wlc['wlc_name']}'... ")
+                validate_ap_name(request_session=wlc_session,
+                                 ap_name=ap.name,
+                                 ap_mac=ap_mgmt_mac)
 
-            validate_ap_radios(request_session=wlc_session,
-                               ap_mac=ap_mgmt_mac,
-                               ap_interfaces=ap_interfaces)
+                validate_ap_radios(request_session=wlc_session,
+                                   ap_mac=ap_mgmt_mac,
+                                   ap_interfaces=ap_interfaces)
 
-        print("*" * 78)
+            print("*" * 78)

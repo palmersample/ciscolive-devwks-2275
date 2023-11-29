@@ -84,7 +84,7 @@ def validate_ap_radios(request_session, ap_mac, ap_interfaces):
             ["ap-specific-slot-configs"]["ap-specific-slot-config"]
 
     except RequestException:
-        print("\t\tFAILED - no radio config preesnt")
+        print("FAILED - no radio config present")
 
     else:
         print()
