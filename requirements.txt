@@ -2,3 +2,4 @@ pynetbox
 jinja2
 requests
 requests_toolbelt
+dotenv==0.9.9
