@@ -142,11 +142,11 @@ test_router()
 
   printf "%40s" "IOSXE SSH Status: "
   SSH_PROXY_RESULT=$(${TIMEOUT_CMD}ssh \
-    -o ProxyCommand="openssl s_client -quiet -servername ${WLC_HOST} -connect ${PROXY_DNS_NAME}:8000" \
+    -o ProxyCommand="openssl s_client -quiet -servername ${WLC_HOST} -connect ${PROXY_DNS_NAME}:${PROXY_SSH_PORT}" \
     -o 'BatchMode=yes' \
     -o 'ConnectionAttempts=1' \
     -o "StrictHostKeyChecking=no" \
-    dummy@${WLC_HOST} -p 8000 2>&1 > /dev/null
+    dummy@${WLC_HOST} -p ${PROXY_SSH_PORT} 2>&1 > /dev/null
   )
   SSH_STATUS=$(grep -i "permission denied" <<<${SSH_PROXY_RESULT})
   if [ $? -ne 0 ]; then
@@ -207,7 +207,7 @@ generate_ssh_config()
   printf "%40s" "SSH proxy: "
   # Generate SSH Proxy Config file
   echo "Host *.${DNS_DOMAIN}" > ${SSH_CONFIG_FILE}
-  echo "  ProxyCommand openssl s_client -quiet -servername %h -connect ${PROXY_HOST}:8000" >> ${SSH_CONFIG_FILE}
+  echo "  ProxyCommand openssl s_client -quiet -servername %h -connect ${PROXY_HOST}:${PROXY_SSH_PORT}" >> ${SSH_CONFIG_FILE}
 
   if [ -f ${SSH_CONFIG_FILE} ]; then
     echo "OK"
@@ -249,7 +249,7 @@ read POD_NUMBER
 POD_NUMBER=$(echo ${POD_NUMBER} | sed 's/^0*//')
 
 PROXY_DNS_NAME="proxy.${DNS_DOMAIN}"
-PROXY_SSH_PORT=8000
+PROXY_SSH_PORT=8022
 PROXY_NETCONF_PORT=8300
 
 #####
