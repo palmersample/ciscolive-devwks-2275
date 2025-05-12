@@ -212,7 +212,6 @@ def get_rf_channel_value(radio_dict):
         netbox_channel_number = int(channel_number)
     else:
         if channel_width in netbox_channel_width_translation:
-            # pylint: disable=loop-global-usage
             for channel_tuple, translated_channel in \
                     netbox_channel_width_translation[channel_width].items():
                 if channel_number in channel_tuple:

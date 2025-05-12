@@ -1,7 +1,6 @@
 """
 Package init for helper functions
 """
-# pylint: disable=use-tuple-over-list
 
 from .request_helpers import create_request_session
 

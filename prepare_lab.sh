@@ -262,8 +262,17 @@ fi
 if [ "x${NETBOX_TOKEN}" = "x" ]; then
   NETBOX_TOKEN="ba9cded0eda0f4053cfbe1e11e33b1e0e141100e"
 fi
+
 WLC_HOST="pod${POD_NUMBER}-wlc.${DNS_DOMAIN}"
 WLC_URL="https://${WLC_HOST}"
+
+if [ "x${WLC_USERNAME}" = "x" ]; then
+  WLC_USERNAME="developer"
+fi
+
+if [ "x${WLC_PASSWORD}" = "x" ]; then
+  WLC_PASSWORD="C1sco12345!CL"
+fi
 
 echo ""
 echo "************************************************************************"
@@ -302,6 +311,8 @@ else
 
   echo "export POD_NUMBER=${POD_NUMBER}" > ${SAVED_ENV_FILE}
   echo "export DNS_DOMAIN=${DNS_DOMAIN}" >> ${SAVED_ENV_FILE}
+  echo "export NETBOX_URL=${NETBOX_URL}" >> ${SAVED_ENV_FILE}
+  echo "export NETBOX_TOKEN=${NETBOX_TOKEN}" >> ${SAVED_ENV_FILE}
   echo "export PROXY_DNS_NAME=${PROXY_DNS_NAME}" >> ${SAVED_ENV_FILE}
   echo "export PROXY_SSH_PORT=${PROXY_SSH_PORT}" >> ${SAVED_ENV_FILE}
   echo "export WLC_HOST=${WLC_HOST}" >> ${SAVED_ENV_FILE}

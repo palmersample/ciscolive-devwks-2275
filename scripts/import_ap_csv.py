@@ -1,21 +1,28 @@
 """
 Import a CSV file into NetBox for Wireless Devices.
 """
-# pylint: disable=loop-global-usage
 import csv
 import argparse
 import os
+import pathlib
+from dotenv import dotenv_values
 import pynetbox
 from helpers import (generate_device_details,
                      update_interfaces,
                      create_or_update_device)
 
+# Read the environment variables created by the "prepare_lab.sh" script
+SCRIPT_PATH = pathlib.PurePath(os.path.dirname(os.path.abspath(__file__)))
+WORKSHOP_ENV = dotenv_values(os.path.join(SCRIPT_PATH.parent, "workshop-env"))
+
+# Store the pod number to set NetBox custom field values
+POD_NUMBER = WORKSHOP_ENV["POD_NUMBER"]
 
 # Set the NetBox URL to the environment variable created during setup.
-NETBOX_URL = os.environ.get("NETBOX_URL")
+NETBOX_URL = WORKSHOP_ENV["NETBOX_URL"]
 
 # Set the NetBox token to the environment variable created during setup.
-NETBOX_TOKEN = os.environ.get("NETBOX_TOKEN")
+NETBOX_TOKEN = WORKSHOP_ENV["NETBOX_TOKEN"]
 
 # Initialize the pynetbox API object
 netbox = pynetbox.api(url=NETBOX_URL, token=NETBOX_TOKEN)

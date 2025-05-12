@@ -2,4 +2,4 @@ __pycache__/
 ssh
 .idea
 scripts/netbox-import.csv
-
+workshop-env

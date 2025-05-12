@@ -1,18 +1,18 @@
 """
 CSV import helper functions - decouple tasks from the main entrypoint.
 """
-# pylint: disable=loop-invariant-statement
 from pynetbox.core.query import RequestError
 from .rf_channel_map import get_rf_channel_value
 
 
-def generate_device_details(netbox_api, csv_row):
+def generate_device_details(netbox_api, csv_row, workshop_pod_number):
     """
     Given a row from the CSV file, create a dictionary suitable for import into
     NetBox to create a device.
 
     :param netbox_api: pynetbox API object reference
     :param csv_row: The current row of the CSV file to process
+    :param workshop_pod_number: Workshop Pod Number for device custom field
     :return: Dict containing NetBox attributes required for device creation.
     """
     # Map CSV columns to DCIM attributes
@@ -58,11 +58,12 @@ def generate_device_details(netbox_api, csv_row):
     #
     # NOTE: WLC association is case-sensitive; must match the name of the WLC
     # as defined in NetBox.
-    custom_fields = {}
+    custom_fields = {"workshop_pod_number": int(workshop_pod_number)}        # Set the custom field value for workshop_pod_number
+
     for csv_field, dcim_custom_object_attr in device_custom_field_map.items():
         if csv_attr := csv_row.get(csv_field):
             associated_wlc = netbox_api.dcim.devices.get(name=csv_attr)
-            try:  # pylint: disable=loop-try-except-usage
+            try:
                 custom_fields.update({dcim_custom_object_attr: associated_wlc.id})
             except AttributeError:
                 print(
