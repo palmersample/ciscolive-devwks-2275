@@ -11,7 +11,8 @@ import os
 import pathlib
 import argparse
 from dotenv import dotenv_values
-from helpers.rf_channel_map import allowed_channel_numbers_24ghz, channel_range_5ghz_20mhz
+from helpers.rf_channel_map import (allowed_channel_numbers_24ghz,
+                                    netbox_channel_to_cisco_wlc_translation)
 
 SCRIPT_PATH = pathlib.PurePath(os.path.dirname(os.path.abspath(__file__)))
 CSV_PATH = os.path.join(SCRIPT_PATH.parent, "scripts")
@@ -21,15 +22,15 @@ WORKSHOP_ENV = dotenv_values(os.path.join(SCRIPT_PATH.parent, "workshop-env"))
 DEFAULT_AP_COUNT = 2
 DEFAULT_OUTPUT_FILE = os.path.join(CSV_PATH, "netbox-import.csv")
 
-POD_NUMBER = WORKSHOP_ENV["POD_NUMBER"]
+POD_NUMBER = WORKSHOP_ENV.get("POD_NUMBER", os.environ.get("POD_NUMBER"))
 
 FLOOR_AP_LOCATIONS = ("N", "S", "E", "W", "C")
 
 DEVICE_TYPES = (
     "air-ap-2802e-b-k9",
     "air-ap-1815w-b-k9",
-    "c9136i-b",
-    "c9124axe-a"
+    # "c9136i-b",
+    # "c9124axe-a"
 )
 
 NETBOX_LOCATIONS = (
@@ -98,8 +99,8 @@ def create_access_point():
     yield "radio1_mac", generate_random_mac_address()
     yield "radio1_band", "5"
     yield "radio1_rf_role", "ap"
-    yield "radio1_enabled", bool(random.getrandbits(1))
-    yield "radio1_channel_number", random.choice(channel_range_5ghz_20mhz)
+    yield "radio1_enabled", str(bool(random.getrandbits(1))).upper()
+    yield "radio1_channel_number", random.choice(list(netbox_channel_to_cisco_wlc_translation.values()))
     yield "radio1_channel_width", 20
     yield "radio1_tx_power", random.randint(9, 18)
 
@@ -114,7 +115,7 @@ def generate_csv_file(ap_count=DEFAULT_AP_COUNT, output_file=DEFAULT_OUTPUT_FILE
 
     ap_list = [dict(create_access_point()) for _ in range(0, ap_count)]
 
-    with open(output_file, 'w', newline='', encoding='utf-8-sig') as csvfile:
+    with open(output_file, 'w', encoding='utf-8-sig') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=dict(create_access_point()).keys())
         writer.writeheader()
         for row in ap_list:
