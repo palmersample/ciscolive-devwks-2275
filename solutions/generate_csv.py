@@ -112,7 +112,11 @@ def generate_csv_file(ap_count=DEFAULT_AP_COUNT, output_file=DEFAULT_OUTPUT_FILE
     :param output_file: CSV output file
     :return: None
     """
-
+    ap_list = []
+    for _ in range(0, ap_count):
+        ap_data = dict(create_access_point())
+        print(f"  Creating AP '{ap_data.get('device_name')}'")
+        ap_list.append(dict(create_access_point()))
     ap_list = [dict(create_access_point()) for _ in range(0, ap_count)]
 
     with open(output_file, 'w', encoding='utf-8-sig') as csvfile:
