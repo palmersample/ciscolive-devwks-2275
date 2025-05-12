@@ -10,12 +10,14 @@ WIRELESS_DEFAULTS = {
     "5": {
         "tx_power": 1,
         "channel": 36,
-        "channel_width": 20
+        "channel_width": 20,
+        "admin_state": True,
     },
     "24": {
         "tx_power": 1,
         "channel": 1,
-        "channel_width": 22  # Actual SHOULD be 20; this is for NetBox map
+        "channel_width": 22,  # Actual SHOULD be 20; this is for NetBox map
+        "admin_state": True,
     }
 }
 
@@ -94,6 +96,7 @@ def validate_ap_radios(request_session, ap_mac, ap_interfaces):
 
             # Get the NetBox radio info
             nb_radio_details = parse_netbox_rf_channel(interface.rf_channel.value)
+            nb_radio_details.update({"enabled": interface.enabled})
             radio_slot_id = interface.name.replace("radio", "")
 
             for wlc_radio in wlc_radio_config:
@@ -110,6 +113,9 @@ def validate_ap_radios(request_session, ap_mac, ap_interfaces):
                     )
                     wlc_tx_power = wlc_radio_params.get(
                         "transmit-power", WIRELESS_DEFAULTS[ap_slot_freq]["tx_power"]
+                    )
+                    wlc_admin_state = wlc_radio_params.get(
+                        "admin-state", WIRELESS_DEFAULTS[ap_slot_freq]["admin_state"]
                     )
 
                     # DCA and DTP enabled by default...
@@ -152,6 +158,14 @@ def validate_ap_radios(request_session, ap_mac, ap_interfaces):
                         test_name="DTP Disabled"), end=""
                     )
                     if not wlc_dtp_enabled:
+                        print("OK")
+                    else:
+                        print("FAILED")
+
+                    print(LEVEL_3_TEST.format(
+                        test_name="Admin state"), end=""
+                    )
+                    if nb_radio_details.get("enabled", True) is wlc_admin_state:
                         print("OK")
                     else:
                         print("FAILED")

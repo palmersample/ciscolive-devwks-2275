@@ -58,7 +58,9 @@ def generate_device_details(netbox_api, csv_row, workshop_pod_number):
     #
     # NOTE: WLC association is case-sensitive; must match the name of the WLC
     # as defined in NetBox.
-    custom_fields = {"workshop_pod_number": int(workshop_pod_number)}        # Set the custom field value for workshop_pod_number
+
+    # Set the custom field value for workshop_pod_number
+    custom_fields = {"workshop_pod_number": int(workshop_pod_number)}
 
     for csv_field, dcim_custom_object_attr in device_custom_field_map.items():
         if csv_attr := csv_row.get(csv_field):
