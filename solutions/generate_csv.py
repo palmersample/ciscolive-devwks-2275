@@ -117,7 +117,6 @@ def generate_csv_file(ap_count=DEFAULT_AP_COUNT, output_file=DEFAULT_OUTPUT_FILE
         ap_data = dict(create_access_point())
         print(f"  Creating AP '{ap_data.get('device_name')}'")
         ap_list.append(dict(create_access_point()))
-    ap_list = [dict(create_access_point()) for _ in range(0, ap_count)]
 
     with open(output_file, 'w', encoding='utf-8-sig') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=dict(create_access_point()).keys())
